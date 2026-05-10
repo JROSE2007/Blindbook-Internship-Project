@@ -88,6 +88,10 @@ When a hunter goes to reportband.gov today, they see a form with ~139 fields. Mo
 
 The hunter fills this out, clicks submit, and USGS processes it. Within hours to days, they receive an email with the Certificate of Appreciation as a PDF.
 
+## Defining Department and Website Roles
+-Reportband.gov: Is the portal ran by the USGS to allow hunters to report bands and recieve data on the bird.
+-USGS: U.S. Geological Survey runs the Bird Banding Laboratory, banding program in partnership the Canadian Wildlife Service.
+-Science Base: Banding datasets are published here yearly (Does not allow you to retrieve data on a specific bird and report it)
 ---
 
 ## Technical Options Evaluated
@@ -189,6 +193,8 @@ reportband.gov doesn't support this feature.
 ---
 
 ### Option 4: JavaScript Auto-Fill (RECOMMENDED) ✅
+
+Was found by messing around in the website, when I found out that it will let you autofill the fields mentioned below with Google's auto fill feature.
 
 **Finding:** Works perfectly and is legally compliant.
 
@@ -613,30 +619,6 @@ Enhancement features:
 
 **No external APIs needed** - USGS has no API to integrate with
 
-### Effort Estimate
-
-- **PART 1:** 2-3 weeks (foundation)
-- **PART 2:** 1-2 weeks (enhancement)
-- **Total:** 3-4 weeks
-
-### Cost Estimate
-
-- **Development:** ~$15,000-25,000 (depends on developer rate)
-- **Operating Cost:** ~$100-200/month
-  - Supabase database: ~$25/month
-  - File storage for PDFs: ~$5-10/month
-  - Edge Functions (if used): ~$10-20/month
-  - No API licensing needed (USGS has no API)
-
-### Timeline
-
-If you have a developer working full-time:
-- Week 1: PART 1 setup + contact info flow
-- Week 2: WebView + JavaScript injection + testing
-- Week 3: Polish + bug fixes
-- Week 4: PART 2 PDF extraction
-- Week 5: Story generation + UI polish
-
 ---
 
 ## Constraints & Limitations
@@ -656,8 +638,6 @@ If you have a developer working full-time:
 2. **Security Changes:** If USGS implements stricter JavaScript security policies (Content Security Policy), they might block script injection. This is unlikely but possible.
 
 3. **PDF Format Changes:** If USGS changes the certificate format significantly, regex patterns might miss data. But we can update patterns and add manual fallback.
-
-4. **Rate Limiting:** If we generate many API calls, we might hit rate limits. But we're not hitting an API - we're just storing data locally.
 
 ### Mitigation Strategies
 
@@ -717,41 +697,10 @@ This feature makes BlindBook the best waterfowl hunting app by letting hunters m
 
 ---
 
-## Next Steps
+*Another option that could be a possibility but is unlikely since there aren't any other partnerships is contacting the USGS to make a partnership with them:
 
-1. **Review this research** - Make sure findings and recommendation make sense
-2. **Validate with USGS** (optional) - Email bandreports@usgs.gov about integration plans
-3. **Get approval** - Share these findings with BlindBook stakeholders
-4. **Plan implementation** - Break down into sprints and assign developers
-5. **Build PART 1** - Foundation (contact info + reporting flow) - 2-3 weeks
-6. **Build PART 2** - Enhancement (certificate upload + extraction) - 1-2 weeks
-7. **Test thoroughly** - With real USGS website and certificates
-8. **Deploy and monitor** - Watch for USGS form changes
+*More of an advanced idea, but by offering a special version of the app for conservation and USGS employees to make reporting much easier for them. The USGS may allow for you to gain access to more integration options to their website.
 
----
+*The final option that was also thrown out was using the Science Base datasets to create your own form of reporting. But since it is only updated yearly, and does not report the bird to the USGS it would not work.
 
-## Questions This Answers
 
-**Q: Can we automate the entire process?**
-A: Technically yes, but not legally/ethically. Headless automation violates the Migratory Bird Treaty Act.
-
-**Q: Do we need to build our own API?**
-A: No. We work within USGS's existing system using JavaScript in a WebView.
-
-**Q: What if USGS changes their website?**
-A: Our JavaScript might need updates, but the overall approach remains viable. We just update field names.
-
-**Q: Is this legal?**
-A: Yes. User is in control, user manually submits officially, we just pre-fill convenience fields.
-
-**Q: How much will this cost to operate?**
-A: ~$100-200/month in server costs. No API licensing needed.
-
-**Q: When can we launch?**
-A: PART 1 in 2-3 weeks, PART 2 in 1-2 weeks after that.
-
-**Q: What if hunters don't want to upload the certificate?**
-A: That's fine. PART 1 works great on its own. PART 2 is optional enhancement.
-
-**Q: Will this work on all devices?**
-A: Yes. Flutter WebView works on iOS and Android.
