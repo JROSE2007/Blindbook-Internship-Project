@@ -72,7 +72,7 @@
 - Researched if automation is technically possible
 - Researched legal implications
 
-**Technical Finding:** Yes, automation is technically possible. We could write a script that:
+**Technical Finding:** Yes, automation could technically be possible. We could write a script that:
 1. Opens reportband.gov
 2. Fills the form automatically
 3. Submits it
